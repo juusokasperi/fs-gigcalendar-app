@@ -1,5 +1,10 @@
 ### Jazz in Helsinki -app
 
+Aluksi:
+Toteuta backend, joka hakee tiedot google-kalenterista ja palauttaa JSON /api/gigs/
+Toka askel lisää PostGRES toteutus. Tätä varten tarvitaan create /api/gigs sekä update /api/gigs/:id sekä delete /api/gigs/:id
+Tarvitaan myös toiminnallisuus joka yhdistää nämä. Infinity scrolling ois hyvä, pitäiskö siis tehdä GraphQL?
+
 Ideas:
 Frontend built using React Native
 
