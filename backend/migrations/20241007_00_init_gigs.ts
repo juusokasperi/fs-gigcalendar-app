@@ -8,7 +8,7 @@ export async function up({ context: queryInterface }) {
       autoIncrement: true
     },
     ical_id: {
-      type: DataTypes.TEXT
+      type: DataTypes.TEXT,
     },
     title: {
       type: DataTypes.TEXT,
@@ -20,7 +20,6 @@ export async function up({ context: queryInterface }) {
     },
     end_time: {
       type: DataTypes.DATE,
-      allowNull: false,
     },
     location: {
       type: DataTypes.TEXT,
@@ -31,6 +30,11 @@ export async function up({ context: queryInterface }) {
     },
     source: {
       type: DataTypes.TEXT,
+      allowNull: false
+    },
+    important: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
       allowNull: false
     },
     created_at: {
