@@ -7,13 +7,12 @@ import { PORT } from './utils/config';
 import Gig from './models';
 import logger from './utils/logger';
 
-import fetchIcalRouter from './controllers/fetch_ical';
+import fetchIcalRouter from './controllers/fetchIcal';
 
 const app = express();
 app.use(express.json());
 
 app.use('/api/fetch', fetchIcalRouter);
-
 app.get('/api/gigs/', async (req, res) => {
 	const gigs = await Gig.findAll();
 	logger.info('Gigs fetched from PostGres');
