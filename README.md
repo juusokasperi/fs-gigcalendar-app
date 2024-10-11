@@ -1,6 +1,6 @@
-### Jazz in Helsinki -app
+## Jazz in Helsinki -app
 
-## To run:
+### To run:
 
 __Create__ env files according to `env.example` and `backend/env.example`
 
