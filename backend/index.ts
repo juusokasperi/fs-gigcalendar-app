@@ -4,20 +4,24 @@ import { connectToDatabase } from './utils/db';
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 require('express-async-errors');
 import { PORT } from './utils/config';
-import Gig from './models';
 import logger from './utils/logger';
+import middleware from './utils/middleware';
 
 import fetchIcalRouter from './controllers/fetchIcal';
+import gigsRouter from './controllers/gigs';
+import loginRouter from './controllers/login';
 
 const app = express();
 app.use(express.json());
+app.use(middleware.requestLogger);
+app.use(middleware.tokenExtractor);
 
 app.use('/api/fetch', fetchIcalRouter);
-app.get('/api/gigs/', async (req, res) => {
-	const gigs = await Gig.findAll();
-	logger.info('Gigs fetched from PostGres');
-	res.json(gigs);
-})
+app.use('/api/gigs', gigsRouter);
+app.use('/api/login', loginRouter);
+
+app.use(middleware.unknownEndPoint);
+app.use(middleware.errorHandler);
 
 const start = async() => {
 	await connectToDatabase();

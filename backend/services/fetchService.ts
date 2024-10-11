@@ -1,5 +1,5 @@
 import axios from 'axios';
-import Gig from '../models/';
+import { Gig } from '../models/';
 import logger from '../utils/logger';
 import { GOOGLE_URL } from '../utils/config';
 import ical from 'ical';

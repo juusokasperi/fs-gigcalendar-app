@@ -1,3 +1,4 @@
 import Gig from './gig';
+import User from './user';
 
-export default Gig;
+export { Gig, User };
