@@ -6,6 +6,12 @@ import ical from 'ical';
 import { Sequelize } from 'sequelize';
 import { rrulestr } from 'rrule';
 import { CalendarEvent } from '../utils/types';
+import sanitizeHtml from 'sanitize-html';
+
+const sanitizeOptions = {
+	allowedTags: ['b', 'i', 'u', 'em', 'strong', 'a', 'p', 'br'],
+	allowedAttributes: { 'a': ['href'] }
+};
 
 const fetchGoogleEvents = async () => {
 	logger.info('Fetching gigs from Google Calendar...');
@@ -30,6 +36,10 @@ const fetchGoogleEvents = async () => {
 		})
 		.flatMap(event => {
 			const source = 'ical';
+			const sanitizedTitle = sanitizeHtml(event.summary!, sanitizeOptions);
+			const sanitizedDescription = event.description ? sanitizeHtml(event.description.replace(/\n/g, '<br />'), sanitizeOptions) : undefined;
+			const sanitizedLocation = sanitizeHtml(event.location!, sanitizeOptions);
+
 			if (event.rrule) {
 				const rule = typeof event.rrule === 'string'
 					? rrulestr(event.rrule)
@@ -46,11 +56,11 @@ const fetchGoogleEvents = async () => {
 
 					return {
 					icalId: event.uid as string,
-					title: event.summary as string,
-					description: event.description,
+					title: sanitizedTitle,
+					description: sanitizedDescription,
 					startTime,
 					endTime,
-					location: event.location as string,
+					location: sanitizedLocation,
 					source
 				}});
 			} else {
@@ -59,11 +69,11 @@ const fetchGoogleEvents = async () => {
 
 				return [{
 					icalId: event.uid as string,
-					title: event.summary as string,
-					description: event.description,
+					title: sanitizedTitle,
+					description: sanitizedDescription,
 					startTime: startTime!,
 					endTime,
-					location: event.location as string,
+					location: sanitizedLocation,
 					source
 				}];
 			}

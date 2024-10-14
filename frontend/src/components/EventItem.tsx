@@ -28,7 +28,7 @@ const EventItem = ({ gig }: { gig: Gig }) => {
           <p>{gig.title} <button onClick={() => setInfoVisible(false)}>hide</button><br />
           {formatDate(gig.startTime)} {gig.endTime && `- ${formatDate(gig.endTime)}`}</p>
           <p>{gig.location}</p>
-          {gig.description} <br />
+          {gig.description && <div dangerouslySetInnerHTML={{ __html: gig.description}} />}
         </div>
       )}
     </div>
