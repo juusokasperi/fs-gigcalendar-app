@@ -1,4 +1,5 @@
 import { FilterDropDownProps } from '../types';
+import '../App.css';
 
 const FilterDropDown: React.FC<FilterDropDownProps> = ({ dispatch }) => {
 	const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -6,12 +7,12 @@ const FilterDropDown: React.FC<FilterDropDownProps> = ({ dispatch }) => {
 	};
 
 	return (
-	  <div>
+	  <div className='filterDropDown'>
 		<select id='filter' onChange={handleChange}>
 		  <option value='Today'>Today</option>
 		  <option value='Tomorrow'>Tomorrow</option>
-		  <option value='Next 7 days'>7 days</option>
-		  <option value='28 days'>28 Days</option>
+		  <option value='Week'>Week</option>
+		  <option value='month'>28 days</option>
 		</select>
 	  </div>
 	);

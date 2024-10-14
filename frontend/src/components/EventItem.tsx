@@ -16,20 +16,15 @@ const EventItem = ({ gig }: { gig: Gig }) => {
 
   return (
     <div>
-      {!infoVisible ? (
-        <div>
 		  <p>
-          {gig.title} <button onClick={() => setInfoVisible(true)}>view</button><br />
-          {formatDate(gig.startTime)} {gig.endTime && `- ${formatDate(gig.endTime)}`}
-          </p>
-		</div>
-      ) : (
+        {gig.title} <button onClick={() => setInfoVisible(!infoVisible)}>{infoVisible ? 'hide': 'view'}</button><br />
+        {formatDate(gig.startTime)} {gig.endTime && `- ${formatDate(gig.endTime)}`}
+      </p>
+      {infoVisible && (
         <div>
-          <p>{gig.title} <button onClick={() => setInfoVisible(false)}>hide</button><br />
-          {formatDate(gig.startTime)} {gig.endTime && `- ${formatDate(gig.endTime)}`}</p>
-          <p>{gig.location}</p>
-          {gig.description && <div dangerouslySetInnerHTML={{ __html: gig.description}} />}
-        </div>
+         <p>{gig.location}</p>
+         {gig.description && <div dangerouslySetInnerHTML={{ __html: gig.description}} />}
+       </div>
       )}
     </div>
   );

@@ -16,6 +16,17 @@ Admin-käyttäjällä oikeus lisätä keikkoja, muokata niitä, merkata importan
 
 Muistiinpanoja:
 ```
+Frontend:
+css-transition kun klikataan view / hide
+muutenkin backgroud-coloria tms että selkeästi näkyy eri eventit.
+ehkä joka toinen event eri taustavärillä tms?
+
+tekstille paddingiä että ei mee reunaan asti
+title ja hide/view omassa divissä jotta se hide/view aina tietyssä kohtaa ruutua.
+sen vois toki korvata arrowup - arrowdown tekstin sijaan, ois ehkä siistimpi ja veis vähemmän tilaa
+
+dropdown menussa arrow down ärsytävän lähellä reunaa?
+
 Myöhemmin mieti:
 Session -table (server-side session)? Onko tarpeellinen vai riittääkö nykynen login-checkaus?
 

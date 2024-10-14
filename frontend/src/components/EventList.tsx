@@ -1,5 +1,6 @@
 import { Gig } from '../types';
 import EventItem from './EventItem';
+import '../App.css';
 
 const EventList = ({ gigs }: { gigs: Gig[] }) => {
   const groupedGigs = gigs.reduce((acc: Record<string, Gig[]>, gig) => {
@@ -15,10 +16,10 @@ const EventList = ({ gigs }: { gigs: Gig[] }) => {
   }, {});
 
   return (
-    <div>
+    <div className='content'>
       {Object.entries(groupedGigs).map(([date, gigs]) => (
         <div key={date}>
-          <h3>{date}</h3>
+          <div className='date'>{date}</div>
           {gigs.map(gig => (
             <EventItem key={gig.id} gig={gig} />
           ))}

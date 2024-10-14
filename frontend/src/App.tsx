@@ -1,12 +1,14 @@
 import { useReducer } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import gigService from './services/gigs';
-//import './App.css'
+import './App.css'
 import { Gig, State, Action } from './types';
 import { filterGigs } from './utils/filterGigs';
 
 import FilterDropDown from './components/FilterDropDown';
 import EventList from './components/EventList';
+import Footer from './components/Footer';
+import Header from './components/Header';
 
 const initialState: State = { filter: 'Today' };
 
@@ -33,10 +35,11 @@ const App = () => {
   const filteredGigs = filterGigs(gigs, state.filter);
 
   return (
-    <div>
-      <h1>Event List</h1>
+    <div className='container'>
+      <Header />
       <FilterDropDown dispatch={dispatch} />
       <EventList gigs={filteredGigs} />
+      <Footer />
     </div>
   )
 };
