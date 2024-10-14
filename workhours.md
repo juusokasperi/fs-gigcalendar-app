@@ -9,4 +9,4 @@
 | 10.10. | 2	| fetch routen funktioiden jakaminen omiin komponentteihin |
 | 11.10. | 10	| backendissä nyt kirjautuminen, token-perustainen checkaaminen, user creation seedillä, keikkojen lisäys, muokkaus ja poisto|
 | 12-13.10. | 8 | frontendi alkuun |
-| 14.10. | 4 | reactQuery, refactoring |
+| 14.10. | 6 | reactQuery, refactoring, html sanitization backend |
