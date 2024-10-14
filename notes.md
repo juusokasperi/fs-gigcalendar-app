@@ -20,15 +20,27 @@ Myöhemmin mieti:
 Session -table (server-side session)? Onko tarpeellinen vai riittääkö nykynen login-checkaus?
 
 CRON -> tee iCal fetch kerran / pv joskus aamuyöllä
+
+Todo:
+Backend testing
 ```
 
 Ideas:
 ```
-Frontend React Native?
+Frontend React (mobile first spa)
 
-Backend hakee tiedot Google calendar iCalista ja tallentaa Postgresiin. Adminilla oikeus lisätä myös keikkoja tietokantaan, päivittää niitä, poistaa.
+React Query, reducer tilan muuttamiseen, ehkä context tilan välittämiseen?
 
-Layout? - needs to be unified for the webpage and the mobile app.
+Perusnäkymässä voi näyttää keikat tänään, tällä viikolla, ens viikolla tai koko kk.
+
+Eventtiä klikkaamalla sää näkyviin lisätiedot, perusmuotoisena näkyy title, startTime, location
+
+Lisätiedoissa locationia klikkaamalla voi hakea muut tapahtumat, joilla sama location.
+
+Hakukenttä, jolla voi hakea title tai location.
+
+
+Unified layout.
 Colors come from JazzFinland color scheme.
 
 Testing?

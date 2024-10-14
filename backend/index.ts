@@ -6,6 +6,7 @@ require('express-async-errors');
 import { PORT } from './utils/config';
 import logger from './utils/logger';
 import middleware from './utils/middleware';
+import cors from 'cors';
 
 import fetchIcalRouter from './controllers/fetchIcal';
 import gigsRouter from './controllers/gigs';
@@ -13,6 +14,7 @@ import loginRouter from './controllers/login';
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 app.use(middleware.requestLogger);
 app.use(middleware.tokenExtractor);
 
