@@ -10,3 +10,4 @@
 | 11.10. | 10	| backendissä nyt kirjautuminen, token-perustainen checkaaminen, user creation seedillä, keikkojen lisäys, muokkaus ja poisto|
 | 12-13.10. | 8 | frontendi alkuun |
 | 14.10. | 10 | reactQuery, refactoring, html sanitization backend, frontendin perus toiminnallisuutta, styling frontend |
+| 15.10. | 4 | & -merkin handlaus backendissä, styled components frontend, muuta stylingiä |

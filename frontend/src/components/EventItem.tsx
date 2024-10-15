@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Gig } from '../types';
+import { EventDiv, BasicInfo, CaretButton } from '../utils/styledComponents';
 
 const EventItem = ({ gig }: { gig: Gig }) => {
   const [infoVisible, setInfoVisible] = useState(false);
@@ -15,18 +16,24 @@ const EventItem = ({ gig }: { gig: Gig }) => {
   };
 
   return (
-    <div>
-		  <p>
-        {gig.title} <button onClick={() => setInfoVisible(!infoVisible)}>{infoVisible ? 'hide': 'view'}</button><br />
-        {formatDate(gig.startTime)} {gig.endTime && `- ${formatDate(gig.endTime)}`}
-      </p>
+    <EventDiv>
+      <BasicInfo onClick={() => setInfoVisible(!infoVisible)}>
+        <div style={{ width:'15%' }} />
+        <div style={{ textAlign: 'center', width: '60%'}}>
+          {gig.title}
+        </div>
+        <div style={{ textAlign: 'right', width: '15%' }}>
+          <CaretButton onClick={() => setInfoVisible(!infoVisible)}>{infoVisible ? '▲': '▼'}</CaretButton><br />
+        </div>
+      </BasicInfo>
+      {formatDate(gig.startTime)} {gig.endTime && `- ${formatDate(gig.endTime)}`}
       {infoVisible && (
         <div>
          <p>{gig.location}</p>
          {gig.description && <div dangerouslySetInnerHTML={{ __html: gig.description}} />}
        </div>
       )}
-    </div>
+    </EventDiv>
   );
 };
 

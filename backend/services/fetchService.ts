@@ -36,9 +36,9 @@ const fetchGoogleEvents = async () => {
 		})
 		.flatMap(event => {
 			const source = 'ical';
-			const sanitizedTitle = sanitizeHtml(event.summary!, sanitizeOptions);
-			const sanitizedDescription = event.description ? sanitizeHtml(event.description.replace(/\n/g, '<br />'), sanitizeOptions) : undefined;
-			const sanitizedLocation = sanitizeHtml(event.location!, sanitizeOptions);
+			const sanitizedTitle = sanitizeHtml(event.summary!, sanitizeOptions).replace(/&amp;/g, '&');
+			const sanitizedDescription = event.description ? sanitizeHtml(event.description.replace(/\n/g, '<br />'), sanitizeOptions).replace(/&amp;/g, '&') : undefined;
+			const sanitizedLocation = sanitizeHtml(event.location!, sanitizeOptions).replace(/&amp;/g, '&');
 
 			if (event.rrule) {
 				const rule = typeof event.rrule === 'string'
