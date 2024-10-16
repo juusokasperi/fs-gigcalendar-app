@@ -10,7 +10,8 @@ const EventItem = ({ gig }: { gig: Gig }) => {
     const formattedTime = new Intl.DateTimeFormat('en-GB', {
       hour: '2-digit',
       minute: '2-digit',
-      hour12: false
+      hour12: false,
+      timeZone: 'Europe/Helsinki'
     }).format(date);
     return formattedTime;
   };

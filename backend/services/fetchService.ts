@@ -54,12 +54,22 @@ const fetchGoogleEvents = async () => {
 						? new Date(new Date(occurrence).getTime() + (eventEndTime.getTime() - eventStartTime.getTime())).toISOString()
 						: undefined;
 
+					const occurrenceTimeZoneOffset = occurrence.getTimezoneOffset();
+					const eventStartTimeZoneOffset = eventStartTime.getTimezoneOffset();
+					let adjustedStartTime = startTime;
+					let adjustedEndTime = endTime;
+					if (occurrenceTimeZoneOffset !== eventStartTimeZoneOffset) {
+						const adjustment = (eventStartTimeZoneOffset - occurrenceTimeZoneOffset) * 60 * 1000;
+						adjustedStartTime = new Date(new Date(startTime).getTime() - adjustment).toISOString();
+						adjustedEndTime = endTime ? new Date(new Date(endTime).getTime() - adjustment).toISOString() : undefined;
+					}
+
 					return {
 					icalId: event.uid as string,
 					title: sanitizedTitle,
 					description: sanitizedDescription,
-					startTime,
-					endTime,
+					startTime: adjustedStartTime,
+					endTime: adjustedEndTime,
 					location: sanitizedLocation,
 					source
 				}});
