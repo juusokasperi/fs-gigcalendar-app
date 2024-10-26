@@ -1,8 +1,8 @@
 import React from 'react';
-import { DateDiv, ContentDiv } from '../utils/styledComponents';
-import { Gig } from '../types';
+import { DateDiv, ContentDiv } from './styled';
+import { Gig } from '../../types';
 import EventItem from './EventItem';
-import { generateEventDates } from '../utils/generateEventDates';
+import { generateEventDates } from '../../utils/generateEventDates';
 
 const EventList = ({ gigs }: { gigs: Gig[] }) => {
   const groupedGigs = gigs.reduce((acc: Record<string, Gig[]>, gig) => {

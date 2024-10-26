@@ -1,7 +1,7 @@
 import { Dispatch } from 'react';
 
 export interface Gig {
-	id: number;
+	id?: number;
 	icalId?: string;
 	title: string;
 	startTime: string;
@@ -12,15 +12,20 @@ export interface Gig {
 	important: boolean;
   };
 
-export type State = {
+export type FilterState = {
 	filter: string;
 };
 
-export type Action = {
+export type FilterAction = {
 	type: 'SET_FILTER';
 	payload: string;
 };
 
 export type FilterDropDownProps = {
-	dispatch: Dispatch<Action>;
-  };
+	dispatch: Dispatch<FilterAction>;
+};
+
+export interface LoginFormValues {
+	username: string;
+	password: string;
+};

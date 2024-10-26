@@ -1,5 +1,5 @@
-import logo from '../img/logo.png';
-import { HeaderDiv } from '../utils/styledComponents';
+import logo from '../../img/logo.png';
+import { HeaderDiv } from './styled';
 
 const Header = () => {
 return (

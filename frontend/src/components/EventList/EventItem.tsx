@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Gig } from '../types';
-import { EventDiv, BasicInfo, CaretButton } from '../utils/styledComponents';
+import { Gig } from '../../types';
+import { EventDiv, BasicInfo, CaretButton } from './styled';
 
 const EventItem = ({ gig }: { gig: Gig }) => {
   const [infoVisible, setInfoVisible] = useState(false);

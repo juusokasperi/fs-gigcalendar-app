@@ -12,3 +12,4 @@
 | 14.10. | 10 | reactQuery, refactoring, html sanitization backend, frontendin perus toiminnallisuutta, styling frontend |
 | 15.10. | 4 | & -merkin handlaus backendissä, styled components frontend, muuta stylingiä |
 | 16.10. | 6 | DST -ajan kanssa puljaamista - ensin luulin että frontendissä vika, mutta ongelma olikin recurring eventsien kanssa, jotka jatkui yli timezonen vaihdoksen, nyt backend ottaa nämä tilanteet huomioon |
+| 17.10. | 8 | lisätty refetch, login, logout |

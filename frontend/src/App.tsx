@@ -1,18 +1,20 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useReducer } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import gigService from './services/gigs';
-import { ContainerDiv } from './utils/styledComponents';
-import { Gig, State, Action } from './types';
+import { ContainerDiv } from './styled';
+import { Gig, FilterState, FilterAction } from './types';
 import { filterGigs } from './utils/filterGigs';
 
 import FilterDropDown from './components/FilterDropDown';
 import EventList from './components/EventList';
+import Login from './components/Login';
 import Footer from './components/Footer';
 import Header from './components/Header';
 
-const initialState: State = { filter: 'Today' };
+const initialState: FilterState = { filter: 'Today' };
 
-const reducer = (state: State, action: Action) => {
+const reducer = (state: FilterState, action: FilterAction) => {
   switch (action.type) {
     case 'SET_FILTER':
       return { ...state, filter: action.payload };
@@ -35,12 +37,22 @@ const App = () => {
   const filteredGigs = filterGigs(gigs, state.filter);
 
   return (
-    <ContainerDiv>
-      <Header />
-      <FilterDropDown dispatch={dispatch} />
-      <EventList gigs={filteredGigs} />
-      <Footer />
-    </ContainerDiv>
+    <Router>
+      <ContainerDiv>
+        <Header />
+        <Routes>
+          <Route path='/' element={
+            <>
+            <FilterDropDown dispatch={dispatch} />
+            <EventList gigs={filteredGigs} /> </>
+          } />
+          <Route path='/login' element={
+              <Login />
+          }/>
+          </Routes>
+        <Footer />
+      </ContainerDiv>
+    </Router>
   )
 };
 

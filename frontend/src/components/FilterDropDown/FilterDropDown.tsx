@@ -1,5 +1,5 @@
-import { FilterDropDownProps } from '../types';
-import { Dropdown, Select } from '../utils/styledComponents';
+import { FilterDropDownProps } from '../../types';
+import { Dropdown, Select } from './styled';
 
 const FilterDropDown: React.FC<FilterDropDownProps> = ({ dispatch }) => {
 	const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
