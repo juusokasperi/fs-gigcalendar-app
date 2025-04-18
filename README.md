@@ -1,5 +1,7 @@
 ## Jazz in Helsinki -app
 
+<img src="./img/preview.gif" alt="app preview" />
+
 ### To run:
 
 __Create__ env files according to `env.example` and `backend/env.example`
