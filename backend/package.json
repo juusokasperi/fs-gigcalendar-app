@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "main": "index.ts",
   "scripts": {
+    "migration:up": "ts-node utils/runMigrations.ts",
     "seed:admin": "ts-node utils/seedAdminUser.ts",
+    "seed:secret": "ts-node utils/seedSecret.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.ts",
+    "dev": "tsx watch index.ts",
     "migration:down": "ts-node utils/rollback.ts"
   },
   "author": "",
@@ -27,7 +29,6 @@
     "ical": "^0.8.0",
     "jsonwebtoken": "^9.0.2",
     "node-cron": "^3.0.3",
-    "nodemon": "^3.1.7",
     "pg": "^8.13.0",
     "rrule": "^2.8.1",
     "sanitize-html": "^2.13.1",
@@ -44,6 +45,7 @@
     "eslint": "^9.12.0",
     "globals": "^15.10.0",
     "ts-node": "^10.9.2",
+    "tsx": "^4.20.5",
     "typescript": "^5.6.2",
     "typescript-eslint": "^8.8.0"
   }

@@ -10,5 +10,5 @@ if (!process.env.GOOGLE_URL
 
 export const POSTGRES_URL = process.env.POSTGRES_URL as string;
 export const GOOGLE_URL = process.env.GOOGLE_URL as string;
-export const PORT = (process.env.port || 3001) as number;
+export const PORT = (process.env.PORT || 3000) as number;
 export const SECRET = process.env.SECRET as string;
