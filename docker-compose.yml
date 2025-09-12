@@ -1,9 +1,52 @@
+secrets:
+  admin_password:
+    file: ./secrets/admin_password.txt
+  postgres_password:
+    file: ./secrets/postgres_password.txt
+
 services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    secrets:
+      - admin_password
+      - postgres_password
+    env_file: .env
+    ports:
+      - "${BACKEND_PORT}:3000"
+    volumes:
+      - ./backend:/app
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    env_file: .env
+    ports:
+      - "${FRONTEND_PORT}:5173"
+    volumes:
+      - ./frontend:/app
+    networks:
+      - app-network
+
   postgres:
     image: postgres
+    secrets:
+      - postgres_password
     environment:
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-    ports:
-      - 5432:5432
+      POSTGRES_PASSWORD_FILE: /run/secrets/postgres_password
+    expose:
+      - "5432"
+    #ports:
+    #  - 5432:5432
     volumes:
       - ./postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

@@ -3,3 +3,5 @@ postgres_data
 .env
 node_modules
 .DS_Store
+package.json
+secrets/*.txt

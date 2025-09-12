@@ -13,3 +13,6 @@
 | 15.10. | 4 | & -merkin handlaus backendissä, styled components frontend, muuta stylingiä |
 | 16.10. | 6 | DST -ajan kanssa puljaamista - ensin luulin että frontendissä vika, mutta ongelma olikin recurring eventsien kanssa, jotka jatkui yli timezonen vaihdoksen, nyt backend ottaa nämä tilanteet huomioon |
 | 17.10. | 8 | lisätty refetch, login, logout |
+| 11.09. | 2 | lisätty scriptit JWT secretin generoimiseksi sekä migraatioiden ajamiseen, jotta voidaan luoda admin -user ennen backendin käynnistämistä |
+| 11.09. | 6 | valmistelua development environmentin siirtämiseksi täysin docker containereihin |
+| 12.09. | 6 | .env tiedoston sijaan salasanat siirretty docker secreteiksi, frontendin konfigurointi dockeria varten, entrypoint -scriptien luonti. projektien päivittäminen käyttämään uusimpia npm -paketteja, nodemonin sijaan käytetään tsx watchia backendissa |
