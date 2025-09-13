@@ -1,8 +1,6 @@
 import express from 'express';
 //import cron from 'node-cron';
 import { connectToDatabase } from './utils/db';
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-require('express-async-errors');
 import { PORT } from './utils/config';
 import logger from './utils/logger';
 import middleware from './utils/middleware';

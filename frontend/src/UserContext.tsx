@@ -34,7 +34,7 @@ const userReducer = (state: UserState | null, action: UserAction): UserState | n
 
 const UserContext = createContext<UserContextType | null>(null);
 
-export const UserContextProvider = (props: PropsWithChildren<{object}>) => {
+export const UserContextProvider = (props: PropsWithChildren) => {
 	const [user, userDispatch] = useReducer(userReducer, null);
 
 	return (
