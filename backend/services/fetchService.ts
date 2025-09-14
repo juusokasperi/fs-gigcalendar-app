@@ -7,6 +7,7 @@ import { Sequelize } from 'sequelize';
 import { rrulestr } from 'rrule';
 import { CalendarEvent } from '../utils/types';
 import sanitizeHtml from 'sanitize-html';
+import { DateTime } from 'luxon';
 
 const sanitizeOptions = {
 	allowedTags: ['b', 'i', 'u', 'em', 'strong', 'a', 'p', 'br'],
@@ -47,29 +48,27 @@ const fetchGoogleEvents = async () => {
 				const occurrences = rule.between(today, monthLater);
 
 				return occurrences.map(occurrence => {
-					const startTime = occurrence.toISOString();
-					const eventEndTime = event.end ? new Date(event.end) : undefined;
-					const eventStartTime = new Date(event.start!);
-					const endTime = eventEndTime
-						? new Date(new Date(occurrence).getTime() + (eventEndTime.getTime() - eventStartTime.getTime())).toISOString()
-						: undefined;
+					const zone = 'Europe/Helsinki';
+					const eventStartTime = DateTime.fromJSDate(new Date(event.start!), { zone });
+					const eventEndTime = event.end ? DateTime.fromJSDate(new Date(event.end), { zone }) : undefined;
+					const duration = eventEndTime ? eventEndTime.diff(eventStartTime) : undefined;
 
-					const occurrenceTimeZoneOffset = occurrence.getTimezoneOffset();
-					const eventStartTimeZoneOffset = eventStartTime.getTimezoneOffset();
-					let adjustedStartTime = startTime;
-					let adjustedEndTime = endTime;
-					if (occurrenceTimeZoneOffset !== eventStartTimeZoneOffset) {
-						const adjustment = (eventStartTimeZoneOffset - occurrenceTimeZoneOffset) * 60 * 1000;
-						adjustedStartTime = new Date(new Date(startTime).getTime() - adjustment).toISOString();
-						adjustedEndTime = endTime ? new Date(new Date(endTime).getTime() - adjustment).toISOString() : undefined;
-					}
+					const occurrenceStart = DateTime.fromObject({
+						year: occurrence.getFullYear(),
+						month: occurrence. getMonth() + 1,
+						day: occurrence.getDate(),
+						hour: occurrence.getHours(),
+						minute: occurrence.getMinutes(),
+						second: occurrence.getSeconds(),
+					}, { zone });
+					const occurrenceEnd = duration ? occurrenceStart.plus(duration) : undefined;
 
 					return {
 					icalId: event.uid as string,
 					title: sanitizedTitle,
 					description: sanitizedDescription,
-					startTime: adjustedStartTime,
-					endTime: adjustedEndTime,
+					startTime: occurrenceStart.toISO(),
+					endTime: occurrenceEnd ? occurrenceEnd.toISO() : undefined,
 					location: sanitizedLocation,
 					source
 				}});
