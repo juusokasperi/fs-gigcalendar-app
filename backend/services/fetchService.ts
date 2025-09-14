@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Gig } from '../models/';
 import logger from '../utils/logger';
-import { GOOGLE_URL } from '../utils/config';
+import { GOOGLE_URL, EVENT_TIMEZONE } from '../utils/config';
 import ical from 'ical';
 import { Sequelize } from 'sequelize';
 import { rrulestr } from 'rrule';
@@ -48,14 +48,14 @@ const fetchGoogleEvents = async () => {
 				const occurrences = rule.between(today, monthLater);
 
 				return occurrences.map(occurrence => {
-					const zone = 'Europe/Helsinki';
+					const zone = EVENT_TIMEZONE;
 					const eventStartTime = DateTime.fromJSDate(new Date(event.start!), { zone });
 					const eventEndTime = event.end ? DateTime.fromJSDate(new Date(event.end), { zone }) : undefined;
 					const duration = eventEndTime ? eventEndTime.diff(eventStartTime) : undefined;
 
 					const occurrenceStart = DateTime.fromObject({
 						year: occurrence.getFullYear(),
-						month: occurrence. getMonth() + 1,
+						month: occurrence.getMonth() + 1,
 						day: occurrence.getDate(),
 						hour: occurrence.getHours(),
 						minute: occurrence.getMinutes(),
@@ -67,7 +67,7 @@ const fetchGoogleEvents = async () => {
 					icalId: event.uid as string,
 					title: sanitizedTitle,
 					description: sanitizedDescription,
-					startTime: occurrenceStart.toUTC().toISO(),
+					startTime: occurrenceStart.toUTC().toISO()!,
 					endTime: occurrenceEnd ? occurrenceEnd.toUTC().toISO() : undefined,
 					location: sanitizedLocation,
 					source
@@ -75,8 +75,6 @@ const fetchGoogleEvents = async () => {
 			} else {
 				const startTime = event.start ? new Date(event.start).toISOString() : undefined;
 				const endTime = event.end ? new Date(event.end).toISOString() : undefined;
-				console.log('title:', sanitizedTitle);
-				console.log('startTime:', startTime);
 				return [{
 					icalId: event.uid as string,
 					title: sanitizedTitle,
