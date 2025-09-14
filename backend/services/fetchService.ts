@@ -67,15 +67,16 @@ const fetchGoogleEvents = async () => {
 					icalId: event.uid as string,
 					title: sanitizedTitle,
 					description: sanitizedDescription,
-					startTime: occurrenceStart.toISO(),
-					endTime: occurrenceEnd ? occurrenceEnd.toISO() : undefined,
+					startTime: occurrenceStart.toUTC().toISO(),
+					endTime: occurrenceEnd ? occurrenceEnd.toUTC().toISO() : undefined,
 					location: sanitizedLocation,
 					source
 				}});
 			} else {
 				const startTime = event.start ? new Date(event.start).toISOString() : undefined;
 				const endTime = event.end ? new Date(event.end).toISOString() : undefined;
-
+				console.log('title:', sanitizedTitle);
+				console.log('startTime:', startTime);
 				return [{
 					icalId: event.uid as string,
 					title: sanitizedTitle,
