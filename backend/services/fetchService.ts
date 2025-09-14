@@ -73,8 +73,13 @@ const fetchGoogleEvents = async () => {
 					source
 				}});
 			} else {
-				const startTime = event.start ? new Date(event.start).toISOString() : undefined;
-				const endTime = event.end ? new Date(event.end).toISOString() : undefined;
+				const zone = EVENT_TIMEZONE;
+				const startTime = event.start
+					? DateTime.fromJSDate(new Date(event.start), { zone }).toUTC().toISO()
+					: undefined;
+				const endTime = event.end
+					? DateTime.fromJSDate(new Date(event.end), { zone }).toUTC().toISO()
+					: undefined;
 				return [{
 					icalId: event.uid as string,
 					title: sanitizedTitle,
