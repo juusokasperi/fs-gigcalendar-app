@@ -12,3 +12,4 @@ export const POSTGRES_URL = process.env.POSTGRES_URL as string;
 export const GOOGLE_URL = process.env.GOOGLE_URL as string;
 export const PORT = (process.env.PORT || 3000) as number;
 export const SECRET = process.env.SECRET as string;
+export const EVENT_TIMEZONE = (process.env.EVENT_TIMEZONE || 'Europe/Helsinki') as string;
